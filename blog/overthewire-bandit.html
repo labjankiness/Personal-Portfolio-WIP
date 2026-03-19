@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OverTheWire Bandit CTF Writeup | Ryan Benedict Quek</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#portfolios">Portfolios</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../projects.html">Projects</a></li>
+            <li><a href="../blog.html" class="active">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+
+    <section class="container blog-post">
+        <a href="../blog.html" class="link">&larr; Back to Blog</a>
+        <h2 class="section-title" style="margin-top: 20px;">OverTheWire Bandit: A Beginner's CTF Walkthrough</h2>
+        <p class="blog-date">March 2026</p>
+
+        <div class="blog-body">
+            <h3>What is OverTheWire Bandit?</h3>
+            <p>Bandit is the entry-level wargame on OverTheWire. It teaches the basics of Linux command-line skills needed for cybersecurity &mdash; SSH, file navigation, permissions, encoding, and more. Each level gives you a password to unlock the next one. It sounds simple, but the later levels get genuinely tricky.</p>
+            <p>This writeup covers my approach to the first several levels, with explanations of <strong>why</strong> each command works, not just what to type.</p>
+
+            <h3>Level 0 &mdash; Connecting via SSH</h3>
+            <p><strong>Goal:</strong> Log into the game server using SSH.</p>
+            <pre><code>ssh -p 2220 bandit0@bandit.labs.overthewire.org</code></pre>
+            <p><strong>Concept:</strong> SSH (Secure Shell) creates an encrypted connection to a remote server. The <code>-p 2220</code> flag specifies a non-standard port &mdash; SSH normally uses port 22, but Bandit runs on 2220. This is common in CTFs and real-world setups to avoid automated scanners.</p>
+
+            <h3>Level 0 &rarr; 1 &mdash; Reading a file</h3>
+            <p><strong>Goal:</strong> Find the password stored in a file called <code>readme</code> in the home directory.</p>
+            <pre><code>ls
+cat readme</code></pre>
+            <p><strong>Concept:</strong> <code>ls</code> lists files in the current directory. <code>cat</code> (concatenate) outputs file contents to the terminal. These are the two most fundamental Linux commands you'll ever use. In security, reading files you shouldn't have access to is half the game.</p>
+
+            <h3>Level 1 &rarr; 2 &mdash; Dashed filename</h3>
+            <p><strong>Goal:</strong> Read a file called <code>-</code> (just a dash).</p>
+            <pre><code>cat ./-</code></pre>
+            <p><strong>Concept:</strong> A bare <code>-</code> is interpreted by most commands as "read from stdin" rather than a filename. Prefixing with <code>./</code> tells the shell "this is a file path in the current directory." This trick appears constantly in CTFs &mdash; attackers sometimes create files with special characters to confuse administrators or scripts.</p>
+
+            <h3>Level 2 &rarr; 3 &mdash; Spaces in filenames</h3>
+            <p><strong>Goal:</strong> Read a file whose name contains spaces.</p>
+            <pre><code>cat "spaces in this filename"</code></pre>
+            <p><strong>Concept:</strong> The shell splits arguments on spaces. Quoting the filename (or escaping each space with <code>\</code>) tells the shell to treat the entire string as one argument. Tab completion handles this automatically &mdash; a useful habit to build early.</p>
+
+            <h3>Level 3 &rarr; 4 &mdash; Hidden files</h3>
+            <p><strong>Goal:</strong> Find a hidden file in the <code>inhere</code> directory.</p>
+            <pre><code>cd inhere
+ls -a
+cat ...Hiding-From-You</code></pre>
+            <p><strong>Concept:</strong> Files starting with <code>.</code> are hidden in Linux. The <code>-a</code> flag for <code>ls</code> reveals them. This is how dotfiles work (<code>.bashrc</code>, <code>.ssh/</code>, <code>.env</code>). From a security perspective, hidden files are a common place to stash credentials, backdoors, or configuration secrets.</p>
+
+            <h3>Level 4 &rarr; 5 &mdash; Finding the right file type</h3>
+            <p><strong>Goal:</strong> Among several files in <code>inhere/</code>, find the one that contains human-readable text.</p>
+            <pre><code>cd inhere
+file ./-file*</code></pre>
+            <p>This shows each file's type. Most will be "data" (binary), but one will be "ASCII text" &mdash; that's the password.</p>
+            <pre><code>cat ./-file07</code></pre>
+            <p><strong>Concept:</strong> The <code>file</code> command examines file contents (magic bytes) to determine the type, regardless of extension. This is crucial in forensics &mdash; file extensions can be faked, but the <code>file</code> command reads the actual header bytes. In incident response, you use this to identify disguised malware.</p>
+
+            <h3>Level 5 &rarr; 6 &mdash; Finding files by properties</h3>
+            <p><strong>Goal:</strong> Find a file somewhere under <code>inhere/</code> that is human-readable, 1033 bytes, and not executable.</p>
+            <pre><code>find inhere/ -type f -size 1033c ! -executable</code></pre>
+            <p><strong>Concept:</strong> The <code>find</code> command searches recursively with filters. <code>-type f</code> matches regular files, <code>-size 1033c</code> matches exactly 1033 bytes (<code>c</code> = bytes), and <code>! -executable</code> excludes executable files. In real security work, <code>find</code> is essential for hunting suspicious files &mdash; looking for recently modified files, SUID binaries, or world-writable directories.</p>
+
+            <h3>Level 6 &rarr; 7 &mdash; Finding files across the system</h3>
+            <p><strong>Goal:</strong> Find a file owned by user <code>bandit7</code>, group <code>bandit6</code>, and exactly 33 bytes.</p>
+            <pre><code>find / -user bandit7 -group bandit6 -size 33c 2>/dev/null</code></pre>
+            <p><strong>Concept:</strong> Now we search the entire filesystem (<code>/</code>). The <code>2>/dev/null</code> redirects error messages (permission denied on directories you can't access) to nowhere, so you only see the actual result. The <code>-user</code> and <code>-group</code> flags filter by ownership. Understanding file ownership and permissions is fundamental to Linux security &mdash; privilege escalation often exploits misconfigured ownership.</p>
+
+            <h3>Key takeaways</h3>
+            <ul>
+                <li><strong>Every command is a building block.</strong> <code>cat</code>, <code>ls</code>, <code>find</code>, and <code>file</code> aren't just "basic" commands &mdash; they're the core toolkit for forensics, incident response, and penetration testing.</li>
+                <li><strong>Special characters matter.</strong> Dashes, spaces, dots &mdash; the shell interprets them differently, and attackers exploit this.</li>
+                <li><strong>Redirect stderr.</strong> <code>2>/dev/null</code> is your best friend when searching large directory trees. Learn redirection early.</li>
+                <li><strong>File metadata tells stories.</strong> Size, ownership, permissions, and type reveal more than the filename ever will.</li>
+                <li><strong>CTFs build real skills.</strong> These aren't just puzzles &mdash; every technique here maps directly to real-world security work.</li>
+            </ul>
+
+            <p style="margin-top: 30px;">Bandit continues for 30+ levels, covering topics like encoding, cryptography, git secrets, cron exploitation, and privilege escalation. I'll post more writeups as I work through them.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p>
+        <p><a href="https://github.com/labjankiness" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
