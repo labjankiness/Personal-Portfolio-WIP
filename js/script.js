@@ -66,3 +66,57 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
+// Project filtering
+const filterNames = {
+    all: 'All Projects',
+    security: 'Cybersecurity Projects',
+    os: 'Operating Systems Projects',
+    ai: 'AI / ML Projects',
+    web: 'Web Projects',
+    game: 'Game Dev Projects'
+};
+
+function applyFilter(filter) {
+    const cards = document.querySelectorAll('.projects-grid .card[data-category]');
+    const buttons = document.querySelectorAll('.filter-btn');
+    const title = document.getElementById('filter-title');
+
+    cards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+            card.classList.remove('hidden');
+        } else {
+            card.classList.add('hidden');
+        }
+    });
+
+    buttons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === filter);
+    });
+
+    if (title) {
+        title.textContent = filterNames[filter] || 'All Projects';
+    }
+}
+
+// Filter button clicks
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        applyFilter(filter);
+        // Update URL without reload
+        const url = new URL(window.location);
+        if (filter === 'all') {
+            url.searchParams.delete('filter');
+        } else {
+            url.searchParams.set('filter', filter);
+        }
+        history.replaceState(null, '', url);
+    });
+});
+
+// Apply filter from URL on page load
+const urlFilter = new URLSearchParams(window.location.search).get('filter');
+if (urlFilter) {
+    applyFilter(urlFilter);
+}

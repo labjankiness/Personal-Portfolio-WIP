@@ -21,10 +21,19 @@
     </nav>
 
     <section class="container">
-        <h2 class="section-title">All Projects</h2>
+        <h2 class="section-title" id="filter-title">All Projects</h2>
+
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="security">Cybersecurity</button>
+            <button class="filter-btn" data-filter="os">Operating Systems</button>
+            <button class="filter-btn" data-filter="ai">AI / ML</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="game">Game Dev</button>
+        </div>
 
         <div class="projects-grid">
-            <div class="card">
+            <div class="card" data-category="os">
                 <span class="card-tag tag-os">Systems</span>
                 <h3>MyOS</h3>
                 <p>A bare-metal x86 hobby operating system with a Windows 7-style GUI desktop, 9 built-in apps (Paint, Snake, Minesweeper, Browser, etc.), 50+ terminal commands, networking stack, preemptive multitasking, persistent filesystem, and AI assistant integration.</p>
@@ -32,7 +41,7 @@
                 <a href="https://github.com/labjankiness/Personal-OS-WIP" target="_blank" class="link">View on GitHub &rarr;</a>
             </div>
 
-            <div class="card">
+            <div class="card" data-category="os">
                 <span class="card-tag tag-os">Systems</span>
                 <h3>ZephyrOS</h3>
                 <p>A standalone Linux distribution with 5 editions (Scholar, Dev, SOC, Lite, Core), each bundling a locally-running AI model. Features a guided TUI installer, Wayfire Wayland desktop, and UEFI boot support.</p>
@@ -40,7 +49,7 @@
                 <a href="https://labjankiness.github.io/ZephyrOS-WIP/" target="_blank" class="link">Visit Website &rarr;</a>
             </div>
 
-            <div class="card">
+            <div class="card" data-category="web">
                 <span class="card-tag tag-web">Web App</span>
                 <h3>RP GPA Calculator</h3>
                 <p>A web-based GPA/CGPA calculator for Republic Polytechnic students, supporting all 41 diploma programmes with localStorage persistence and PDF export.</p>
@@ -48,7 +57,7 @@
                 <a href="https://labjankiness.github.io/RP-GPA-CGPA-Calculator/" target="_blank" class="link">Live Site &rarr;</a>
             </div>
 
-            <div class="card">
+            <div class="card" data-category="security">
                 <span class="card-tag tag-security">Cybersecurity</span>
                 <h3>Port Scanner Suite</h3>
                 <p>A concurrent TCP port scanner implemented in 4 languages (Python, C, Go, Rust) with service banner grabbing, multi-threaded scanning, and performance comparison.</p>
@@ -56,15 +65,15 @@
                 <a href="https://github.com/labjankiness/CyberSecurity-Portfolio-WIP" target="_blank" class="link">View on GitHub &rarr;</a>
             </div>
 
-            <div class="card">
-                <span class="card-tag tag-ai">AI / ML</span>
+            <div class="card" data-category="security">
+                <span class="card-tag tag-security">Cybersecurity</span>
                 <h3>Local AI SOC Agent</h3>
                 <p>An AI-powered Security Operations Center that uses locally-hosted LLMs (Ollama) to triage security alerts and generate threat reports in real-time.</p>
                 <div class="card-meta"><span>Python &bull; Ollama &bull; LLM</span></div>
                 <a href="https://github.com/labjankiness/CyberSecurity-Portfolio-WIP" target="_blank" class="link">View on GitHub &rarr;</a>
             </div>
 
-            <div class="card">
+            <div class="card" data-category="ai">
                 <span class="card-tag tag-ai">AI / ML</span>
                 <h3>Comms Link Diagnostic Agent</h3>
                 <p>A Gemini 2.0 Flash-powered AI agent using ReAct architecture to diagnose network signal quality &mdash; analyzing SNR, latency, and packet loss.</p>
@@ -72,7 +81,7 @@
                 <a href="https://github.com/labjankiness/Personal-AI-Agent-WIP" target="_blank" class="link">View on GitHub &rarr;</a>
             </div>
 
-            <div class="card">
+            <div class="card" data-category="game">
                 <span class="card-tag tag-game">Game Dev</span>
                 <h3>FPS Protocol</h3>
                 <p>A 3D first-person shooter training range built with Three.js featuring multiple game modes, difficulty settings, and moving targets.</p>
