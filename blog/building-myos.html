@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building MyOS: A Hobby Operating System | Ryan Benedict Quek</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#portfolios">Portfolios</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../projects.html">Projects</a></li>
+            <li><a href="../blog.html" class="active">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+
+    <section class="container blog-post">
+        <a href="../blog.html" class="link">&larr; Back to Blog</a>
+        <h2 class="section-title" style="margin-top: 20px;">Building MyOS: A Hobby Operating System from Scratch</h2>
+        <p class="blog-date">March 2026</p>
+
+        <div class="blog-body">
+            <h3>Why build an OS?</h3>
+            <p>I wanted to understand what actually happens when you press the power button. Not the abstract textbook version &mdash; the real thing. What loads first? How does the screen show pixels? How does the keyboard work without drivers someone else wrote? Building MyOS answered all of that and more.</p>
+            <p>MyOS is a bare-metal x86 operating system that boots via GRUB into an 800x600 graphical desktop. It has no dependencies on Linux, Windows, or any existing OS. Everything &mdash; from the memory allocator to the window manager to the TCP stack &mdash; is written from scratch in C and x86 Assembly.</p>
+
+            <h3>Starting from nothing</h3>
+            <p>The first milestone was getting a single pixel on screen. That alone took days. You need a multiboot-compliant bootloader, a framebuffer set up by GRUB, and a way to write to video memory. There's no <code>printf</code>, no <code>malloc</code>, no standard library at all. You compile with <code>-ffreestanding -nostdlib -nostdinc</code> and everything you use, you write yourself.</p>
+            <p>The bootloader (<code>boot.asm</code>) sets up the GDT, loads the IDT, installs ISR/IRQ stubs, and jumps to <code>kernel_main</code> in C. From there, the kernel initializes the PIT timer at 100Hz, sets up the PS/2 keyboard and mouse drivers, and enters the desktop loop.</p>
+
+            <h3>The GUI: a Windows 7-inspired desktop</h3>
+            <p>I wanted a real windowed desktop, not just a terminal. The window manager supports draggable windows with title bars, minimize/close buttons, a taskbar with a clock, and a start menu. Each application runs inside a window and receives keyboard and mouse input.</p>
+            <p>The desktop uses a simple compositing approach: draw the background, then each window back-to-front, with the active window on top. The cursor is saved/restored to avoid full redraws on every mouse move.</p>
+            <p>There are now 14 built-in apps: Notepad, Calculator, System Info, Terminal, File Manager, Breeze Browser, Paint, Snake, Minesweeper, Tetris, 2048, Flappy Bird, Solitaire, and Checkers.</p>
+
+            <h3>The terminal: 50+ Linux-style commands</h3>
+            <p>The terminal was where I spent the most time. It supports <code>ls -l</code>, <code>grep</code>, <code>find</code>, <code>tree</code>, <code>cat</code>, <code>head</code>, <code>tail</code>, <code>cp</code>, <code>mv</code>, pipes (<code>cmd | grep pattern</code>), environment variables, aliases, tab completion, command history with arrow keys, and output redirection.</p>
+            <p>There are also fun commands: <code>cowsay</code>, <code>fortune</code>, <code>cal</code>, and <code>screenfetch</code> that shows system info with an ASCII art logo. It feels surprisingly close to a real Linux shell.</p>
+
+            <h3>Networking from Ethernet to HTTP</h3>
+            <p>The networking stack was the hardest part. I wrote a driver for the AMD PCnet-PCI II network card (the one QEMU and VirtualBox emulate), then built up from raw Ethernet frames through ARP, IPv4, UDP, TCP, DNS, and HTTP.</p>
+            <p>The <code>wget</code> command can fetch web pages. The Breeze Browser renders HTML. And the <code>ai</code> command sends HTTP POST requests to Ollama running on the host, letting you chat with an LLM from inside the OS.</p>
+
+            <h3>Kernel fundamentals</h3>
+            <p>Under the hood, MyOS has x86 paging with 4KB pages and a page fault handler, a physical page bitmap allocator, a first-fit heap allocator with coalescing, preemptive round-robin multitasking driven by the PIT timer, and an ATA/IDE disk driver with a custom filesystem (MYFS) for persistent storage.</p>
+            <p>You can save the entire filesystem to disk and it reloads on next boot. Processes have PCBs and context switch via IRQ0 with 50ms time slices.</p>
+
+            <h3>What I learned</h3>
+            <p>Building an OS taught me more about computers than any course could. Some specific takeaways:</p>
+            <ul>
+                <li><strong>Everything is memory-mapped.</strong> The framebuffer, device registers, page tables &mdash; it's all just addresses.</li>
+                <li><strong>Interrupts are everything.</strong> Without IRQs, the keyboard doesn't work, the timer doesn't tick, and the network card can't receive packets.</li>
+                <li><strong>Debugging without tools is brutal.</strong> No debugger, no logs, no stack traces. When something crashes, you get a triple fault and the VM reboots. I learned to use QEMU's <code>-d int</code> flag and GDB remote debugging.</li>
+                <li><strong>Networking is layers of trust.</strong> Each protocol assumes the one below it works. When it doesn't, you stare at hex dumps for hours.</li>
+                <li><strong>Freestanding C is a different language.</strong> No <code>strlen</code>, no <code>memcpy</code>, no <code>printf</code>. You write them all yourself and appreciate them forever after.</li>
+            </ul>
+
+            <h3>Try it yourself</h3>
+            <p>MyOS is open source and runs in QEMU or VirtualBox. You can download the ISO and boot it right now:</p>
+            <p><a href="https://github.com/labjankiness/Personal-OS-WIP/releases/download/v1.0/my-os.iso" class="btn primary" style="margin-top: 10px;">Download MyOS ISO</a></p>
+            <p><a href="https://github.com/labjankiness/Personal-OS-WIP" target="_blank" class="link">View source on GitHub &rarr;</a></p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p>
+        <p><a href="https://github.com/labjankiness" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

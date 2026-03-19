@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing a Port Scanner in 4 Languages | Ryan Benedict Quek</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#portfolios">Portfolios</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../projects.html">Projects</a></li>
+            <li><a href="../blog.html" class="active">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+
+    <section class="container blog-post">
+        <a href="../blog.html" class="link">&larr; Back to Blog</a>
+        <h2 class="section-title" style="margin-top: 20px;">Writing a Port Scanner in 4 Languages</h2>
+        <p class="blog-date">March 2026</p>
+
+        <div class="blog-body">
+            <h3>The idea</h3>
+            <p>Port scanning is one of the first things you learn in cybersecurity. Tools like Nmap do it well, but I wanted to understand what's actually happening at the socket level. So I built the same TCP port scanner in four languages: Python, C, Go, and Rust.</p>
+            <p>The goal wasn't just to get it working &mdash; it was to compare how each language handles concurrency, error handling, and raw network I/O.</p>
+
+            <h3>Python: the quick prototype</h3>
+            <p>Python was the fastest to write. Using <code>socket</code> and <code>concurrent.futures.ThreadPoolExecutor</code>, I had a working multi-threaded scanner in under 50 lines. It connects to each port with a timeout, grabs the service banner if available, and prints results.</p>
+            <p>The downside? Speed. Even with threading, Python's GIL means you're not truly parallel. For scanning 65,535 ports, it's noticeably slower than the compiled alternatives.</p>
+
+            <h3>C: close to the metal</h3>
+            <p>The C version uses POSIX sockets and <code>pthreads</code>. It's more code &mdash; you manually manage memory, handle <code>errno</code>, and build your own thread pool. But it's fast. Really fast.</p>
+            <p>Writing it in C gave me a much deeper understanding of what <code>connect()</code> actually does at the syscall level, and how <code>select()</code> or <code>poll()</code> can be used for non-blocking I/O.</p>
+
+            <h3>Go: concurrency done right</h3>
+            <p>Go was the sweet spot. Goroutines make concurrent scanning trivial &mdash; just <code>go scanPort(port)</code> inside a loop with a semaphore channel to limit concurrency. The <code>net.DialTimeout</code> function handles connection attempts cleanly.</p>
+            <p>The resulting code is almost as short as Python but runs nearly as fast as C. Go's concurrency model is genuinely impressive for network tools.</p>
+
+            <h3>Rust: safety and speed</h3>
+            <p>Rust was the hardest to write but produced the most robust code. The borrow checker caught several bugs at compile time that would have been runtime issues in C. Using <code>tokio</code> for async I/O and <code>TcpStream::connect_timeout</code>, the scanner is both fast and memory-safe.</p>
+            <p>Error handling with <code>Result&lt;T, E&gt;</code> forced me to handle every possible failure case, which is exactly what you want in a security tool.</p>
+
+            <h3>Performance comparison</h3>
+            <p>Scanning the first 1024 ports on localhost (approximate results):</p>
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                <tr style="border-bottom: 2px solid var(--border);">
+                    <th style="text-align: left; padding: 8px; color: var(--accent);">Language</th>
+                    <th style="text-align: left; padding: 8px; color: var(--accent);">Time</th>
+                    <th style="text-align: left; padding: 8px; color: var(--accent);">Lines of Code</th>
+                    <th style="text-align: left; padding: 8px; color: var(--accent);">Concurrency Model</th>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 8px;">Python</td>
+                    <td style="padding: 8px;">~12s</td>
+                    <td style="padding: 8px;">~45</td>
+                    <td style="padding: 8px;">ThreadPoolExecutor</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 8px;">C</td>
+                    <td style="padding: 8px;">~2s</td>
+                    <td style="padding: 8px;">~150</td>
+                    <td style="padding: 8px;">pthreads</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 8px;">Go</td>
+                    <td style="padding: 8px;">~3s</td>
+                    <td style="padding: 8px;">~60</td>
+                    <td style="padding: 8px;">goroutines + channels</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 8px;">Rust</td>
+                    <td style="padding: 8px;">~2s</td>
+                    <td style="padding: 8px;">~80</td>
+                    <td style="padding: 8px;">tokio async</td>
+                </tr>
+            </table>
+
+            <h3>Key takeaways</h3>
+            <ul>
+                <li><strong>Python</strong> is great for prototyping security tools but hits a wall with performance-sensitive tasks.</li>
+                <li><strong>C</strong> gives you full control but demands careful memory management. One wrong pointer and your scanner becomes a vulnerability.</li>
+                <li><strong>Go</strong> is the pragmatic choice for network tools. Goroutines are simple, fast, and hard to misuse.</li>
+                <li><strong>Rust</strong> is the best choice when correctness matters. The compiler catches bugs that would slip through in every other language.</li>
+            </ul>
+            <p>If I were building a production security tool, I'd pick Go for speed of development or Rust for maximum reliability. For a quick audit script, Python still wins.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p>
+        <p><a href="https://github.com/labjankiness" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

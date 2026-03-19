@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building a GPA Calculator for RP Students | Ryan Benedict Quek</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#portfolios">Portfolios</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../projects.html">Projects</a></li>
+            <li><a href="../blog.html" class="active">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+
+    <section class="container blog-post">
+        <a href="../blog.html" class="link">&larr; Back to Blog</a>
+        <h2 class="section-title" style="margin-top: 20px;">Building a GPA Calculator for RP Students</h2>
+        <p class="blog-date">March 2026</p>
+
+        <div class="blog-body">
+            <h3>The problem</h3>
+            <p>Republic Polytechnic students calculate GPA differently from universities. Each module has credit units, and grades map to specific grade points. But there was no dedicated tool for RP students to quickly calculate their semester GPA or cumulative CGPA &mdash; most people were doing it manually or using generic calculators that didn't match RP's grading system.</p>
+
+            <h3>What I built</h3>
+            <p>A web-based GPA/CGPA calculator specifically designed for Republic Polytechnic. It supports all 41 diploma programmes, so students can select their course and see the correct module list with the right credit units.</p>
+            <p>Key features:</p>
+            <ul>
+                <li><strong>All 41 diplomas</strong> &mdash; select your programme and get the correct modules and credit units</li>
+                <li><strong>Semester GPA</strong> &mdash; calculate your GPA for any individual semester</li>
+                <li><strong>Cumulative CGPA</strong> &mdash; track your overall CGPA across multiple semesters</li>
+                <li><strong>localStorage persistence</strong> &mdash; your grades are saved in the browser so you don't lose them when you close the tab</li>
+                <li><strong>PDF export</strong> &mdash; generate a clean PDF report of your GPA breakdown</li>
+            </ul>
+
+            <h3>Technical decisions</h3>
+            <p>I kept the stack deliberately simple: vanilla HTML, CSS, and JavaScript. No frameworks, no build tools, no npm packages. The entire app is a static site that can be hosted for free on GitHub Pages.</p>
+            <p>Why no framework? Because the problem doesn't need one. A GPA calculator is fundamentally a form that does arithmetic. Adding React or Vue would have introduced build complexity, increased load times, and made it harder for other students to understand and contribute to the code.</p>
+            <p>The diploma programme data (module names, credit units) is stored as a JavaScript object. This means updating it when RP changes their curriculum is as simple as editing one file.</p>
+
+            <h3>localStorage for persistence</h3>
+            <p>One of the most useful features is automatic saving. When you enter grades, they're stored in <code>localStorage</code> so they persist across browser sessions. This was important because students typically update their GPA calculator at the end of each semester &mdash; they shouldn't have to re-enter everything each time.</p>
+            <p>The data is stored as JSON keyed by diploma programme, so switching between programmes doesn't overwrite your data.</p>
+
+            <h3>PDF export</h3>
+            <p>Students often need to share their GPA with advisors or include it in applications. The PDF export generates a clean, formatted report showing each module, grade, credit units, and the calculated GPA/CGPA. This was implemented using the browser's built-in print functionality with a print-specific CSS stylesheet &mdash; no external PDF library needed.</p>
+
+            <h3>What I learned</h3>
+            <ul>
+                <li><strong>Build for your users.</strong> I'm an RP student, so I knew exactly what the pain points were. The best tools come from scratching your own itch.</li>
+                <li><strong>Simple tech is underrated.</strong> Vanilla JS with no build step means anyone can fork, understand, and modify the code in minutes.</li>
+                <li><strong>localStorage is powerful.</strong> For client-side apps that don't need a backend, it's a simple way to add persistence without any server infrastructure.</li>
+                <li><strong>Ship early.</strong> The first version was rough but usable. Feedback from classmates drove every improvement after that.</li>
+            </ul>
+
+            <h3>Try it</h3>
+            <p><a href="https://labjankiness.github.io/RP-GPA-CGPA-Calculator/" target="_blank" class="btn primary" style="margin-top: 10px;">Open GPA Calculator</a></p>
+            <p><a href="https://github.com/labjankiness/RP-GPA-CGPA-Calculator" target="_blank" class="link">View source on GitHub &rarr;</a></p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p>
+        <p><a href="https://github.com/labjankiness" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
