@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | RP Student</title>
+    <title>Ryan Benedict Quek | Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <nav class="navbar">
-        <a href="index.html" class="logo active">Home</a>
+        <a href="index.html" class="logo active">RB</a>
         <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#portfolios">Portfolios</a></li>
+            <li><a href="#skills">Skills</a></li>
             <li><a href="projects.html">Projects</a></li>
             <li><a href="blog.html">Blog</a></li>
             <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
@@ -19,52 +22,140 @@
 
     <header class="hero-section">
         <div class="hero-content">
-            <h1>Hello, I'm <span class="highlight">Ryan Benedict Quek Tze Wei</span></h1>
-            <p>Year 1 Student @ Republic Polytechnic | Aspiring Software Engineer</p>
+            <p class="hero-greeting">Hi, my name is</p>
+            <h1><span class="highlight">Ryan Benedict Quek Tze Wei</span></h1>
+            <p class="hero-tagline">I build things for the web, systems, and security.</p>
+            <p class="hero-desc">Year 1 Student at Republic Polytechnic with a passion for software engineering, cybersecurity, and low-level systems programming. I enjoy building tools that solve real problems &mdash; from hobby operating systems to AI-powered security agents.</p>
             <div class="cta-buttons">
-                <a href="projects.html" class="btn primary">View Projects</a>
-                <a href="#contact" class="btn secondary">Contact Me</a>
+                <a href="#portfolios" class="btn primary">Explore My Work</a>
+                <a href="#contact" class="btn secondary">Get In Touch</a>
             </div>
         </div>
     </header>
 
-    <section id="skills" class="container">
-        <h2 class="section-title">Tech Stack</h2>
-        <div class="skills-grid">
-            <div class="skill-tag">Python</div>
-            <div class="skill-tag">JavaScript</div>
-            <div class="skill-tag">HTML / CSS</div>
-            <div class="skill-tag">C</div>
-            <div class="skill-tag">Go</div>
-            <div class="skill-tag">Rust</div>
-            <div class="skill-tag">Three.js</div>
-            <div class="skill-tag">Git / GitHub</div>
-            <div class="skill-tag">Linux</div>
-            <div class="skill-tag">Networking</div>
+    <section id="about" class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <p>I'm a polytechnic student who loves building software from the ground up. Whether it's writing a bare-metal operating system in C, creating AI agents that diagnose network issues, or building web apps that help fellow students &mdash; I'm always learning by doing.</p>
+            <p>My current focus areas include <strong>cybersecurity</strong>, <strong>systems programming</strong>, and <strong>local AI/LLM tooling</strong>. I believe in keeping things minimalistic, functional, and well-crafted.</p>
         </div>
     </section>
 
     <section id="portfolios" class="container">
         <h2 class="section-title">My Portfolios</h2>
+        <p class="section-desc">Specialized collections of my work, organized by domain.</p>
         <div class="projects-grid">
-            <div class="card">
+            <div class="card portfolio-card">
+                <div class="card-icon">&#128274;</div>
                 <span class="card-tag tag-security">Cybersecurity</span>
                 <h3>Cybersecurity Portfolio</h3>
-                <p>A dedicated portfolio showcasing my cybersecurity projects, tools, and writeups — including port scanners, SOC agents, and CTF walkthroughs.</p>
+                <p>Security tools, SOC automation, port scanners in 4 languages, and CTF writeups. Covers offensive and defensive security projects.</p>
+                <div class="card-meta">
+                    <span>Python &bull; C &bull; Go &bull; Rust</span>
+                </div>
                 <a href="https://github.com/labjankiness/CyberSecurity-Portfolio-WIP" target="_blank" class="link">View Portfolio &rarr;</a>
             </div>
-            <div class="card">
-                <span class="card-tag tag-os">Systems</span>
+            <div class="card portfolio-card">
+                <div class="card-icon">&#128187;</div>
+                <span class="card-tag tag-os">Operating Systems</span>
                 <h3>OS Development</h3>
-                <p>Hobby operating systems built from scratch — MyOS (bare-metal x86 with GUI) and ZephyrOS (standalone Linux distro with AI integration).</p>
+                <p>Hobby operating systems built from scratch &mdash; MyOS (bare-metal x86 with GUI, 50+ commands, networking) and ZephyrOS (standalone Linux distro with AI).</p>
+                <div class="card-meta">
+                    <span>C &bull; x86 Assembly &bull; Linux</span>
+                </div>
+                <a href="projects.html" class="link">View Projects &rarr;</a>
+            </div>
+            <div class="card portfolio-card">
+                <div class="card-icon">&#129302;</div>
+                <span class="card-tag tag-ai">AI / ML</span>
+                <h3>AI & Automation</h3>
+                <p>AI-powered tools including a network diagnostic agent using Gemini, LLM integration in operating systems, and local AI workflows with Ollama.</p>
+                <div class="card-meta">
+                    <span>Python &bull; Ollama &bull; Gemini API</span>
+                </div>
                 <a href="projects.html" class="link">View Projects &rarr;</a>
             </div>
         </div>
     </section>
 
+    <section id="featured" class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="card">
+                <span class="card-tag tag-os">Systems</span>
+                <h3>MyOS</h3>
+                <p>A bare-metal x86 operating system with a Windows 7-style GUI desktop, 9 built-in apps, 50+ terminal commands, networking stack, preemptive multitasking, and AI integration.</p>
+                <a href="https://github.com/labjankiness/Personal-OS-WIP/releases/download/v1.0/my-os.iso" class="link">Download ISO &rarr;</a>
+            </div>
+            <div class="card">
+                <span class="card-tag tag-os">Systems</span>
+                <h3>ZephyrOS</h3>
+                <p>A standalone Linux distribution with 5 editions, each bundling a locally-running AI model. Full installer, Wayfire desktop, and UEFI boot support.</p>
+                <a href="https://labjankiness.github.io/ZephyrOS-WIP/" target="_blank" class="link">Visit Website &rarr;</a>
+            </div>
+            <div class="card">
+                <span class="card-tag tag-web">Web App</span>
+                <h3>RP GPA Calculator</h3>
+                <p>A web-based GPA/CGPA calculator for Republic Polytechnic students, supporting all 41 diploma programmes with localStorage persistence and PDF export.</p>
+                <a href="https://labjankiness.github.io/RP-GPA-CGPA-Calculator/" target="_blank" class="link">Live Site &rarr;</a>
+            </div>
+            <div class="card">
+                <span class="card-tag tag-ai">AI / ML</span>
+                <h3>Comms Link Diagnostic Agent</h3>
+                <p>A Gemini 2.0 Flash-powered AI agent using ReAct architecture to diagnose network signal quality &mdash; analyzing SNR, latency, and packet loss.</p>
+                <a href="https://github.com/labjankiness/Personal-AI-Agent-WIP" target="_blank" class="link">View on GitHub &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <h2 class="section-title">Tech Stack</h2>
+        <div class="skills-categories">
+            <div class="skill-category">
+                <h3 class="skill-cat-title">Languages</h3>
+                <div class="skills-grid">
+                    <div class="skill-tag">Python</div>
+                    <div class="skill-tag">C</div>
+                    <div class="skill-tag">Go</div>
+                    <div class="skill-tag">Rust</div>
+                    <div class="skill-tag">JavaScript</div>
+                    <div class="skill-tag">HTML / CSS</div>
+                    <div class="skill-tag">x86 Assembly</div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3 class="skill-cat-title">Tools & Platforms</h3>
+                <div class="skills-grid">
+                    <div class="skill-tag">Git / GitHub</div>
+                    <div class="skill-tag">Linux</div>
+                    <div class="skill-tag">QEMU / VirtualBox</div>
+                    <div class="skill-tag">Ollama</div>
+                    <div class="skill-tag">Wireshark</div>
+                    <div class="skill-tag">Nmap</div>
+                    <div class="skill-tag">Docker</div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3 class="skill-cat-title">Domains</h3>
+                <div class="skills-grid">
+                    <div class="skill-tag">Cybersecurity</div>
+                    <div class="skill-tag">Networking</div>
+                    <div class="skill-tag">OS Development</div>
+                    <div class="skill-tag">AI / LLM</div>
+                    <div class="skill-tag">Web Development</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact" class="container">
-        <h2 class="section-title">Contact Me</h2>
-        <p>Feel free to reach out via <a href="https://github.com/labjankiness" target="_blank" class="inline-link">GitHub</a>.</p>
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <p>I'm always open to connecting with fellow developers, security enthusiasts, or anyone interested in collaborating on projects. Feel free to reach out!</p>
+            <div class="contact-links">
+                <a href="https://github.com/labjankiness" target="_blank" class="btn secondary">GitHub</a>
+            </div>
+        </div>
     </section>
 
     <footer class="footer">

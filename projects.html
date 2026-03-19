@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | RP Student</title>
+    <title>Projects | Ryan Benedict Quek</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <nav class="navbar">
-        <a href="index.html" class="logo">Home</a>
+        <a href="index.html" class="logo">RB</a>
         <ul class="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#portfolios">Portfolios</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
             <li><a href="projects.html" class="active">Projects</a></li>
             <li><a href="blog.html">Blog</a></li>
             <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
@@ -18,48 +21,62 @@
     </nav>
 
     <section class="container">
-        <h2 class="section-title">My Projects</h2>
+        <h2 class="section-title">All Projects</h2>
+
         <div class="projects-grid">
+            <div class="card">
+                <span class="card-tag tag-os">Systems</span>
+                <h3>MyOS</h3>
+                <p>A bare-metal x86 hobby operating system with a Windows 7-style GUI desktop, 9 built-in apps (Paint, Snake, Minesweeper, Browser, etc.), 50+ terminal commands, networking stack, preemptive multitasking, persistent filesystem, and AI assistant integration.</p>
+                <div class="card-meta"><span>C &bull; x86 Assembly &bull; GRUB</span></div>
+                <a href="https://github.com/labjankiness/Personal-OS-WIP" target="_blank" class="link">View on GitHub &rarr;</a>
+            </div>
+
+            <div class="card">
+                <span class="card-tag tag-os">Systems</span>
+                <h3>ZephyrOS</h3>
+                <p>A standalone Linux distribution with 5 editions (Scholar, Dev, SOC, Lite, Core), each bundling a locally-running AI model. Features a guided TUI installer, Wayfire Wayland desktop, and UEFI boot support.</p>
+                <div class="card-meta"><span>Shell &bull; Linux &bull; archiso</span></div>
+                <a href="https://labjankiness.github.io/ZephyrOS-WIP/" target="_blank" class="link">Visit Website &rarr;</a>
+            </div>
+
+            <div class="card">
+                <span class="card-tag tag-web">Web App</span>
+                <h3>RP GPA Calculator</h3>
+                <p>A web-based GPA/CGPA calculator for Republic Polytechnic students, supporting all 41 diploma programmes with localStorage persistence and PDF export.</p>
+                <div class="card-meta"><span>JavaScript &bull; HTML &bull; CSS</span></div>
+                <a href="https://labjankiness.github.io/RP-GPA-CGPA-Calculator/" target="_blank" class="link">Live Site &rarr;</a>
+            </div>
+
             <div class="card">
                 <span class="card-tag tag-security">Cybersecurity</span>
                 <h3>Port Scanner Suite</h3>
-                <p>A concurrent TCP port scanner implemented in 4 languages (Python, C, Go, Rust) with service banner grabbing and multi-threaded scanning.</p>
-                <a href="https://github.com/labjankiness" target="_blank" class="link">View on GitHub &rarr;</a>
+                <p>A concurrent TCP port scanner implemented in 4 languages (Python, C, Go, Rust) with service banner grabbing, multi-threaded scanning, and performance comparison.</p>
+                <div class="card-meta"><span>Python &bull; C &bull; Go &bull; Rust</span></div>
+                <a href="https://github.com/labjankiness/CyberSecurity-Portfolio-WIP" target="_blank" class="link">View on GitHub &rarr;</a>
             </div>
+
             <div class="card">
                 <span class="card-tag tag-ai">AI / ML</span>
                 <h3>Local AI SOC Agent</h3>
                 <p>An AI-powered Security Operations Center that uses locally-hosted LLMs (Ollama) to triage security alerts and generate threat reports in real-time.</p>
-                <a href="https://github.com/labjankiness" target="_blank" class="link">View on GitHub &rarr;</a>
+                <div class="card-meta"><span>Python &bull; Ollama &bull; LLM</span></div>
+                <a href="https://github.com/labjankiness/CyberSecurity-Portfolio-WIP" target="_blank" class="link">View on GitHub &rarr;</a>
             </div>
+
             <div class="card">
-                <span class="card-tag tag-web">Web App</span>
-                <h3>RP GPA Calculator</h3>
-                <p>A web-based GPA/CGPA calculator for Republic Polytechnic students, supporting all 41 diploma programmes with PDF export.</p>
-                <a href="https://labjankiness.github.io/RP-GPA-CGPA-Calculator/" target="_blank" class="link">Live Site &rarr;</a>
+                <span class="card-tag tag-ai">AI / ML</span>
+                <h3>Comms Link Diagnostic Agent</h3>
+                <p>A Gemini 2.0 Flash-powered AI agent using ReAct architecture to diagnose network signal quality &mdash; analyzing SNR, latency, and packet loss.</p>
+                <div class="card-meta"><span>Python &bull; Gemini API</span></div>
+                <a href="https://github.com/labjankiness/Personal-AI-Agent-WIP" target="_blank" class="link">View on GitHub &rarr;</a>
             </div>
+
             <div class="card">
                 <span class="card-tag tag-game">Game Dev</span>
                 <h3>FPS Protocol</h3>
                 <p>A 3D first-person shooter training range built with Three.js featuring multiple game modes, difficulty settings, and moving targets.</p>
-                <a href="https://github.com/labjankiness" target="_blank" class="link">View on GitHub &rarr;</a>
-            </div>
-            <div class="card">
-                <span class="card-tag tag-os">Systems</span>
-                <h3>MyOS</h3>
-                <p>A hobby x86 operating system kernel booting via GRUB with a graphical desktop, memory manager, VFS, and networking stack.</p>
-                <a href="https://github.com/labjankiness" target="_blank" class="link">View on GitHub &rarr;</a>
-            </div>
-            <div class="card">
-                <span class="card-tag tag-os">Systems</span>
-                <h3>ZephyrOS</h3>
-                <p>An Arch Linux-based distro with Wayfire Wayland compositor, UEFI Secure Boot support, and reproducible ISO builds via archiso.</p>
-                <a href="https://github.com/labjankiness" target="_blank" class="link">View on GitHub &rarr;</a>
-            </div>
-            <div class="card">
-                <span class="card-tag tag-ai">AI / ML</span>
-                <h3>Comms Link Diagnostic Agent</h3>
-                <p>A Gemini-powered AI agent using ReAct architecture to diagnose network signal quality (SNR, latency, packet loss).</p>
+                <div class="card-meta"><span>JavaScript &bull; Three.js</span></div>
                 <a href="https://github.com/labjankiness" target="_blank" class="link">View on GitHub &rarr;</a>
             </div>
         </div>
