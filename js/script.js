@@ -120,3 +120,39 @@ const urlFilter = new URLSearchParams(window.location.search).get('filter');
 if (urlFilter) {
     applyFilter(urlFilter);
 }
+
+// Typing effect on hero tagline
+const tagline = document.querySelector('.hero-tagline');
+if (tagline) {
+    const phrases = [
+        'I build things for security and AI.',
+        'I fine-tune LLMs on cybersecurity data.',
+        'I build operating systems from scratch.',
+        'I build things for the web and systems.',
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function type() {
+        const current = phrases[phraseIndex];
+        if (deleting) {
+            tagline.textContent = current.substring(0, charIndex--);
+            if (charIndex < 0) {
+                deleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(type, 400);
+                return;
+            }
+        } else {
+            tagline.textContent = current.substring(0, charIndex++);
+            if (charIndex > current.length) {
+                deleting = true;
+                setTimeout(type, 2000);
+                return;
+            }
+        }
+        setTimeout(type, deleting ? 40 : 70);
+    }
+    type();
+}
