@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fracture: Fine-Tuning an LLM on Cybersecurity Data | Ryan Benedict Quek</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+        .results-table th, .results-table td {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+        .results-table th {
+            background: var(--card-bg);
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .results-table tr:nth-child(even) {
+            background: var(--card-bg);
+        }
+        .results-table td.positive { color: #4ade80; }
+        .results-table td.negative { color: #f87171; }
+        .results-table td.neutral  { color: var(--text-muted); }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .summary-stat {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        .summary-stat .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .summary-stat .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .version-badge {
+            display: inline-block;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            font-family: monospace;
+            margin-right: 6px;
+        }
+        .phase-block {
+            border-left: 3px solid var(--accent);
+            padding-left: 16px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#portfolios">Portfolios</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../projects.html">Projects</a></li>
+            <li><a href="../blog.html" class="active">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+
+    <section class="container blog-post">
+        <a href="../blog.html" class="link">&larr; Back to Blog</a>
+        <h2 class="section-title" style="margin-top: 20px;">Fracture: Fine-Tuning an LLM on Cybersecurity Data</h2>
+        <p class="blog-date">June 2026 &bull; Research Project</p>
+
+        <div class="blog-body">
+
+            <h3>The Goal</h3>
+            <p>I wanted to understand how large language models actually learn — not from a textbook, but by doing it myself. Fracture is a 3-phase self-directed ML research project: first fine-tune an existing model on cybersecurity data, then build a transformer from scratch in pure PyTorch, then build real-world cybersecurity ML tools.</p>
+            <p>The question driving Phase 1: <strong>can a small, consumer-grade LLM (1.1B parameters) be meaningfully improved on cybersecurity reasoning through targeted fine-tuning on a modest dataset?</strong></p>
+
+            <h3>Phase 1 — Fine-Tuning TinyLlama</h3>
+            <p>The base model is <strong>TinyLlama-1.1B-Chat-v1.0</strong> — small enough to train on consumer hardware, large enough to demonstrate meaningful learning. The fine-tuning method is <strong>LoRA (Low-Rank Adaptation)</strong>, which adds trainable rank-16 matrices to 6 attention/MLP layers while keeping the base weights frozen. This keeps VRAM usage low and training fast.</p>
+
+            <div class="phase-block">
+                <strong>Model:</strong> TinyLlama-1.1B-Chat-v1.0<br>
+                <strong>Method:</strong> LoRA (r=16, 6 target modules, ~9.9M trainable params out of 1.1B)<br>
+                <strong>Training:</strong> 1000 steps, cosine LR schedule, early stopping<br>
+                <strong>Hardware:</strong> NVIDIA RTX 4070 (12GB VRAM), bf16 precision<br>
+                <strong>Eval:</strong> 15 cybersecurity questions, scored by response length + keyword density
+            </div>
+
+            <h3>The Dataset Problem</h3>
+            <p>Getting to a model that actually improves took four iterations, and the bottleneck was almost always the dataset — not the training code.</p>
+
+            <p><span class="version-badge">v1 & v2</span> Used the MMLU <code>computer_security</code> and <code>security_studies</code> subsets directly from HuggingFace. The benchmark showed a <strong>−19.6 average regression</strong> — the fine-tuned model was worse than the base. The problem: MMLU answers are 3–10 words long (multiple choice answer text). Training on brevity caused the model to give shorter, shallower answers than the baseline on open-ended questions.</p>
+
+            <p><span class="version-badge">v3</span> Added 56 CTF writeup examples and 68 synthetic QA pairs. Some improvement — average regression narrowed to −9.7 — but the MMLU short-answer problem still dominated.</p>
+
+            <p><span class="version-badge">v4</span> Root cause fixed. I replaced all 231 MMLU examples with expanded 100–200 word technical explanations generated via a larger local model (qwen3-coder), giving each question a proper answer rather than a bare letter choice. Combined with the CTF data, 68 synthetic examples, and 200 expanded CVE descriptions, the final dataset had 634 examples. Training on this achieved <strong>+5.2 average improvement</strong> over baseline.</p>
+
+            <h3>Phase 1 Results — v4</h3>
+
+            <div class="summary-grid">
+                <div class="summary-stat">
+                    <div class="stat-value">59.1</div>
+                    <div class="stat-label">Fine-tuned avg score</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="stat-value">53.9</div>
+                    <div class="stat-label">Baseline avg score</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="stat-value">+5.2</div>
+                    <div class="stat-label">Avg improvement</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="stat-value">10/15</div>
+                    <div class="stat-label">Questions improved</div>
+                </div>
+            </div>
+
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Base</th>
+                        <th>Fine-tuned</th>
+                        <th>Delta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Stack canary</td><td>45.2</td><td>60.9</td><td class="positive">+15.7</td></tr>
+                    <tr><td>Buffer overflow</td><td>60.9</td><td>73.9</td><td class="positive">+13.0</td></tr>
+                    <tr><td>Use-after-free</td><td>60.9</td><td>71.3</td><td class="positive">+10.4</td></tr>
+                    <tr><td>Zero-day vulnerability</td><td>53.0</td><td>63.5</td><td class="positive">+10.5</td></tr>
+                    <tr><td>SQL injection</td><td>50.4</td><td>58.3</td><td class="positive">+7.9</td></tr>
+                    <tr><td>Symmetric vs asymmetric encryption</td><td>42.6</td><td>50.4</td><td class="positive">+7.8</td></tr>
+                    <tr><td>ASLR bypass</td><td>50.4</td><td>55.7</td><td class="positive">+5.3</td></tr>
+                    <tr><td>Golden ticket attack</td><td>50.4</td><td>55.7</td><td class="positive">+5.3</td></tr>
+                    <tr><td>ROP chain / NX bypass</td><td>63.5</td><td>68.7</td><td class="positive">+5.2</td></tr>
+                    <tr><td>Lateral movement</td><td>55.7</td><td>60.9</td><td class="positive">+5.2</td></tr>
+                    <tr><td>XSS vs CSRF</td><td>55.7</td><td>55.7</td><td class="neutral">0.0</td></tr>
+                    <tr><td>OSINT</td><td>50.4</td><td>50.4</td><td class="neutral">0.0</td></tr>
+                    <tr><td>Credential stuffing</td><td>53.0</td><td>53.0</td><td class="neutral">0.0</td></tr>
+                    <tr><td>Reverse shell</td><td>58.3</td><td>55.7</td><td class="negative">−2.6</td></tr>
+                    <tr><td>Fuzzing</td><td>58.3</td><td>53.0</td><td class="negative">−5.3</td></tr>
+                </tbody>
+            </table>
+
+            <h3>What I Learned</h3>
+            <p>The biggest lesson was that <strong>dataset quality matters far more than training hyperparameters</strong>. Three iterations failed not because of bad training code, but because the answers were too short to teach the model anything useful. Once I fixed the data, the model improved on the first try.</p>
+            <p>The 5 topics that still regress or stall (reverse shell, fuzzing, XSS/CSRF, OSINT, credential stuffing) are the targets for v5 — 50 additional examples with detailed technical answers have already been generated for these topics specifically.</p>
+            <p>LoRA is genuinely powerful for constrained hardware. 9.9M trainable parameters out of 1.1B (0.89%) was enough to meaningfully shift the model's knowledge in a specific domain, in under an hour on a consumer GPU.</p>
+
+            <h3>What's Next</h3>
+            <div class="phase-block">
+                <strong>Phase 1 v5</strong> — targeted fine-tuning on the 5 regressing topics<br>
+                <strong>Phase 2</strong> — build a small transformer (~0.5M params) from scratch in pure PyTorch, character tokenizer, train on the same dataset for direct comparison<br>
+                <strong>Phase 3</strong> — real cybersecurity ML tools: malware classifier (PE feature extraction), intrusion detection (CICIDS-2017 network flows), log anomaly detection (Isolation Forest + Autoencoder), vulnerability predictor (C/C++ static analysis)
+            </div>
+
+            <p>The full code, training configs, datasets, and benchmark results are on <a href="https://github.com/labjankiness/Fracture" target="_blank" class="link" style="display:inline;">GitHub &rarr;</a></p>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p>
+        <p><a href="https://github.com/labjankiness" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
