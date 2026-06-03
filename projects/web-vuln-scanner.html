@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Vulnerability Scanner | Ryan Benedict Quek</title>
+    <meta property="og:title" content="Web Vulnerability Scanner">
+    <meta property="og:description" content="Python CLI scanner testing for SQLi, XSS, LFI, open redirect, and missing security headers with site crawling and JSON reports.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">Web Vulnerability Scanner</h2>
+        <p class="blog-date">Python &bull; requests &bull; BeautifulSoup</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>A Python CLI tool that tests web applications for common vulnerabilities by injecting payloads into URL parameters and analysing responses. Supports single-URL scanning or full site crawling.</p>
+            <h3>Checks</h3>
+            <ul>
+                <li><strong>SQL Injection</strong> — error-based detection (SQL error strings in response) and time-based blind (SLEEP payload with response delay measurement)</li>
+                <li><strong>Reflected XSS</strong> — injects script payloads and checks if they appear unencoded in the response</li>
+                <li><strong>Local File Inclusion</strong> — path traversal payloads checking for /etc/passwd and Windows hosts file signatures</li>
+                <li><strong>Open Redirect</strong> — tests redirect parameters (url=, next=, return=) for external redirect hijacking</li>
+                <li><strong>Missing Security Headers</strong> — checks for CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy</li>
+            </ul>
+            <h3>Usage</h3>
+            <p><code>python scanner.py "http://target.com?id=1"</code> — scan a single URL. Add <code>--crawl</code> to spider the site and test all discovered parameters. Add <code>--report</code> to save a JSON report.</p>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness/Ultimate-CyberSecurity-Arsenal" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

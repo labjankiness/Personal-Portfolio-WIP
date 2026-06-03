@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSH Honeypot | Ryan Benedict Quek</title>
+    <meta property="og:title" content="SSH Honeypot">
+    <meta property="og:description" content="A fake SSH server that captures attacker credentials, commands, and geolocation with a real-time Streamlit dashboard.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">SSH Honeypot</h2>
+        <p class="blog-date">Python &bull; Socket &bull; SQLite &bull; Streamlit</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>A fake SSH server that listens on port 22, accepts connections, and captures everything attackers do — without giving them real access to anything. Built to study real-world attack patterns and credential stuffing in the wild.</p>
+            <h3>What it captures</h3>
+            <ul>
+                <li>All connection attempts with timestamps and source IPs</li>
+                <li>Username/password combinations tried (credential capture)</li>
+                <li>Commands entered after fake login acceptance</li>
+                <li>IP geolocation (country, city, ASN)</li>
+                <li>Credential reuse detection across multiple IPs</li>
+            </ul>
+            <h3>Analytics</h3>
+            <p>All data is persisted in SQLite and visualised in a Streamlit real-time dashboard showing attack frequency, top credentials tried, geographic heatmap of attackers, and automated attack pattern analysis. The honeypot also flags when the same credential pair is tried from multiple IPs — a strong indicator of a credential stuffing campaign.</p>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness/Ultimate-CyberSecurity-Arsenal" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

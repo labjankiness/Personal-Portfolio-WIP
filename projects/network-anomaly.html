@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Anomaly Detector | Ryan Benedict Quek</title>
+    <meta property="og:title" content="Network Anomaly Detector">
+    <meta property="og:description" content="Statistical anomaly detection for network traffic — builds behavioral baselines and flags port scans, C2 beaconing, DNS tunneling, and lateral movement.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">Network Anomaly Detector</h2>
+        <p class="blog-date">Python &bull; Statistics &bull; Streamlit</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>A statistical anomaly detection engine for network traffic. Instead of using fixed rules, it builds a behavioral baseline from observed traffic patterns and flags deviations using z-score analysis — the same approach used in real SOC environments.</p>
+            <h3>What it detects</h3>
+            <ul>
+                <li><strong>Port scans</strong> — unusually high connection attempts across many ports from one source</li>
+                <li><strong>C2 beaconing</strong> — regular, periodic outbound connections (fixed interval = automated)</li>
+                <li><strong>Data exfiltration</strong> — abnormally large outbound data volumes</li>
+                <li><strong>DNS tunneling</strong> — high DNS query frequency or unusually long domain names</li>
+                <li><strong>Lateral movement</strong> — internal hosts scanning other internal hosts</li>
+            </ul>
+            <h3>How the baseline works</h3>
+            <p>The engine collects traffic statistics over a configurable window, calculates mean and standard deviation per metric per source, and flags any observation more than N standard deviations from the mean. The Streamlit dashboard shows live traffic, active anomalies, and baseline drift over time.</p>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness/Ultimate-CyberSecurity-Arsenal" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packet Sniffer | Ryan Benedict Quek</title>
+    <meta property="og:title" content="Packet Sniffer — Rust CLI">
+    <meta property="og:description" content="A Rust CLI packet sniffer parsing TCP, UDP, ICMP, ARP, IPv4, and IPv6 with filtering and hex dump mode.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">Packet Sniffer</h2>
+        <p class="blog-date">Rust &bull; pnet &bull; clap</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>A CLI network packet sniffer written in Rust using the <code>pnet</code> library for raw packet capture. Parses packets down to the protocol level and displays them with colour-coded output.</p>
+            <h3>Supported protocols</h3>
+            <ul>
+                <li>Ethernet frame parsing</li>
+                <li>IPv4 and IPv6 (addresses, TTL, fragmentation)</li>
+                <li>TCP (flags, ports, sequence numbers)</li>
+                <li>UDP (ports, payload length)</li>
+                <li>ICMP (type, code, echo request/reply)</li>
+                <li>ARP (request/reply, MAC to IP mappings)</li>
+            </ul>
+            <h3>Features</h3>
+            <ul>
+                <li>Protocol filtering (<code>--filter tcp</code>, <code>--filter udp</code>, etc.)</li>
+                <li>Port filtering (<code>--port 80</code>)</li>
+                <li>Hex dump mode for raw payload inspection</li>
+                <li>Colour-coded output by protocol type</li>
+            </ul>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness/Ultimate-CyberSecurity-Arsenal" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

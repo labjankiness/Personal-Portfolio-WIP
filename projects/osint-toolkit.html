@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Toolkit | Ryan Benedict Quek</title>
+    <meta property="og:title" content="OSINT Toolkit">
+    <meta property="og:description" content="Passive and active domain reconnaissance — WHOIS, DNS, subdomain enumeration via crt.sh, Google dorks, and email harvesting.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">OSINT Toolkit</h2>
+        <p class="blog-date">Python &bull; requests &bull; python-whois</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>A modular command-line OSINT tool for domain intelligence gathering. Each module can be run independently or all together. Designed for the passive and active reconnaissance phases of a penetration test or security assessment.</p>
+            <h3>Modules</h3>
+            <ul>
+                <li><strong>WHOIS</strong> — registrar, creation/expiry dates, organisation, country, name servers</li>
+                <li><strong>DNS recon</strong> — A, AAAA, MX, NS, TXT, CNAME, SOA, SRV records via dig</li>
+                <li><strong>Subdomain enumeration</strong> — concurrent wordlist brute-force (50 threads) + certificate transparency logs via crt.sh API (finds subdomains from SSL certificates even without DNS)</li>
+                <li><strong>Google dorks</strong> — generates 15 pre-built dork queries (admin panels, config files, exposed credentials, LinkedIn employees, GitHub references) with clickable search URLs</li>
+                <li><strong>Email harvesting</strong> — scrapes homepage for email addresses, generates common pattern guesses</li>
+            </ul>
+            <h3>Output</h3>
+            <p>Colour-coded terminal output with a summary at the end. Add <code>--report</code> to save everything as a timestamped JSON file for documentation.</p>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness/Ultimate-CyberSecurity-Arsenal" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

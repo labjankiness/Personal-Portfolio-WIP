@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS Protocol | Ryan Benedict Quek</title>
+    <meta property="og:title" content="FPS Protocol — 3D Browser Game">
+    <meta property="og:description" content="A 3D first-person shooter training range built with Three.js featuring multiple game modes and moving targets.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">FPS Protocol</h2>
+        <p class="blog-date">JavaScript &bull; Three.js &bull; WebGL</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>A 3D first-person shooter training range that runs entirely in the browser using Three.js and WebGL. No download, no install — just open and play. Built to explore 3D game development fundamentals: scene management, raycasting, collision detection, and game loop design.</p>
+            <h3>Features</h3>
+            <ul>
+                <li>3D environment with first-person camera controls (pointer lock)</li>
+                <li>Multiple game modes with varying difficulty</li>
+                <li>Moving targets with different movement patterns</li>
+                <li>Score tracking and performance metrics</li>
+                <li>Adjustable sensitivity and settings</li>
+            </ul>
+            <h3>Technical notes</h3>
+            <p>Hit detection uses Three.js raycasting — a ray is cast from the camera in the look direction on each click, and intersection tests determine hits. Target movement is driven by parametric equations to create smooth, unpredictable patterns without a physics engine.</p>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

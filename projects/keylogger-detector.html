@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keylogger Detector | Ryan Benedict Quek</title>
+    <meta property="og:title" content="Keylogger Detector — Linux Security Scanner">
+    <meta property="og:description" content="A Linux security scanner running 8 detection checks for keyloggers including process signatures and kernel module inspection.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">Keylogger Detector</h2>
+        <p class="blog-date">Python &bull; Linux Security</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>A Linux security scanner that checks a running system for signs of keylogger activity. Runs 8 independent detection checks covering different attack vectors — from user-space process injection to kernel-level rootkits.</p>
+            <h3>Detection checks</h3>
+            <ul>
+                <li><strong>Process signatures</strong> — scans running processes for known keylogger names and patterns</li>
+                <li><strong>LD_PRELOAD hijacking</strong> — checks for malicious shared libraries injected via LD_PRELOAD</li>
+                <li><strong>Kernel modules</strong> — inspects loaded kernel modules for suspicious names and hidden modules</li>
+                <li><strong>Input device access</strong> — identifies processes with open handles to /dev/input devices</li>
+                <li><strong>Persistence mechanisms</strong> — checks cron, systemd, .bashrc, .profile for keylogger startup entries</li>
+                <li><strong>Network connections</strong> — flags processes reading input devices that also have outbound connections (exfiltration)</li>
+                <li><strong>File system anomalies</strong> — looks for suspicious hidden files and log files in unexpected locations</li>
+                <li><strong>X11 hook detection</strong> — checks for X11 event grabbing that intercepts all keystrokes</li>
+            </ul>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness/Ultimate-CyberSecurity-Arsenal" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

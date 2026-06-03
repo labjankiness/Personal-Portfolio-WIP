@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local AI SOC | Ryan Benedict Quek</title>
+    <meta property="og:title" content="Local AI SOC Agent">
+    <meta property="og:description" content="A full SIEM pipeline using local LLMs — alert triage, MITRE mapping, threat intelligence, and Streamlit dashboard.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">Local AI SOC Agent</h2>
+        <p class="blog-date">Python &bull; Ollama &bull; SQLite &bull; Streamlit &bull; MITRE ATT&CK</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>A self-hosted Security Operations Center that uses locally-running LLMs (via Ollama) to automate alert triage — no cloud APIs, no data leaving the machine. Designed to demonstrate how AI can assist a SOC analyst rather than replace them.</p>
+            <h3>Pipeline</h3>
+            <ul>
+                <li><strong>Ingestion</strong> — accepts security alerts in JSON format (simulated or real)</li>
+                <li><strong>Triage</strong> — LLM classifies severity, identifies attack type, and generates a structured analysis with confidence score</li>
+                <li><strong>MITRE mapping</strong> — maps each alert to relevant ATT&CK techniques and tactics</li>
+                <li><strong>Correlation</strong> — groups related alerts across time windows to surface attack campaigns</li>
+                <li><strong>Response engine</strong> — suggests remediation steps based on the identified technique</li>
+                <li><strong>Persistence</strong> — all alerts and analyses stored in SQLite for historical analysis</li>
+            </ul>
+            <h3>Testing</h3>
+            <p>Includes a 27-type attack simulator that generates realistic alert payloads for: brute force, SQL injection, XSS, port scans, privilege escalation, lateral movement, data exfiltration, ransomware, and more. Used to validate detection logic without needing a real compromised environment.</p>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness/Ultimate-CyberSecurity-Arsenal" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

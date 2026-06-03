@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comms Link Diagnostic Agent | Ryan Benedict Quek</title>
+    <meta property="og:title" content="Comms Link Diagnostic Agent">
+    <meta property="og:description" content="A Gemini 2.0 Flash ReAct agent that diagnoses network signal quality by analysing SNR, latency, and packet loss.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">Comms Link Diagnostic Agent</h2>
+        <p class="blog-date">Python &bull; Gemini 2.0 Flash &bull; ReAct Architecture</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>A terminal-based AI agent that diagnoses network signal quality using the ReAct (Reasoning + Acting) architecture. Given a signal scenario, the agent reasons about what to check, calls diagnostic tools, interprets the results, and produces a structured diagnosis — mimicking how a network engineer would think through the problem.</p>
+            <h3>ReAct loop</h3>
+            <p>The agent operates in a think-act-observe cycle: it reasons about the current state, decides which tool to call, observes the result, and updates its reasoning. This continues until the agent has enough information to produce a final diagnosis. The full reasoning trace is printed so you can see exactly how it arrived at its conclusion.</p>
+            <h3>Tools</h3>
+            <ul>
+                <li><strong>analyze_signal_metrics</strong> — evaluates SNR, RSSI, noise floor, and modulation scheme against thresholds</li>
+                <li><strong>check_bandwidth</strong> — calculates theoretical and effective throughput given current conditions</li>
+                <li><strong>trace_route_analysis</strong> — analyses latency and packet loss patterns across network hops</li>
+            </ul>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness/AI-Projects" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

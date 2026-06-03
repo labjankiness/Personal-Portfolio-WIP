@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Email Analyzer | Ryan Benedict Quek</title>
+    <meta property="og:title" content="Phishing Email Analyzer">
+    <meta property="og:description" content="AI-powered phishing detection combining SPF/DKIM/DMARC validation, URL analysis, and LLM-based content inspection.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">Phishing Email Analyzer</h2>
+        <p class="blog-date">Python &bull; Ollama &bull; Email Parsing &bull; MITRE ATT&CK</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>A multi-layer phishing detection tool that combines three independent analysis methods: email authentication validation, URL reputation scanning, and LLM-based content analysis. Each layer catches different attack vectors that the others might miss.</p>
+            <h3>Layer 1 — Email authentication</h3>
+            <p>Validates SPF, DKIM, and DMARC records for the sending domain. A legitimate email from paypal.com should pass all three. Failure or missing records is a strong phishing indicator — most phishing emails spoof domains that don't have these controls configured.</p>
+            <h3>Layer 2 — URL analysis</h3>
+            <p>Extracts all URLs from the email body and checks for homograph attacks (e.g. pаypal.com using a Cyrillic 'а' instead of Latin 'a'), suspicious TLDs, URL shorteners, and domains that closely resemble known brands using Levenshtein distance.</p>
+            <h3>Layer 3 — LLM content analysis</h3>
+            <p>Passes the email subject and body to a locally-running Ollama model with a security-focused prompt. The model identifies social engineering tactics (urgency, fear, authority impersonation), suspicious requests, and unusual phrasing patterns.</p>
+            <p>Results are output as a colour-coded terminal report with a final risk score and MITRE ATT&CK technique mappings (T1566 Phishing, T1598 Spearphishing, etc.).</p>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness/Ultimate-CyberSecurity-Arsenal" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>
