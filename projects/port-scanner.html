@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port Scanner Suite | Ryan Benedict Quek</title>
+    <meta property="og:title" content="Port Scanner Suite — 4 Languages">
+    <meta property="og:description" content="A concurrent TCP port scanner implemented in Python, C, Go, and Rust with performance comparison.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">Port Scanner Suite — 4 Languages</h2>
+        <p class="blog-date">Python &bull; C &bull; Go &bull; Rust</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>The same concurrent TCP port scanner implemented four times — in Python, C, Go, and Rust — to compare concurrency models, performance, and developer ergonomics across languages. Each implementation progresses through 4 versions: basic → concurrent → CLI → service banner grabbing.</p>
+            <h3>Language comparison</h3>
+            <ul>
+                <li><strong>Python</strong> — ThreadPoolExecutor, simplest code, slowest execution</li>
+                <li><strong>C</strong> — pthreads, fastest raw performance, most manual memory management</li>
+                <li><strong>Go</strong> — goroutines + channels, excellent balance of speed and readability</li>
+                <li><strong>Rust</strong> — Rayon parallel iterators, memory-safe, near-C performance</li>
+            </ul>
+            <p>A separate benchmarking tool auto-compiles all versions, runs each against the same target, and generates a comparative report with timing data and tradeoff analysis.</p>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness/Ultimate-CyberSecurity-Arsenal" target="_blank" class="btn secondary">View on GitHub</a>
+                <a href="../blog/port-scanner-4-languages.html" class="btn secondary" style="margin-left:12px;">Read Writeup</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

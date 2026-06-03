@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZephyrOS | Ryan Benedict Quek</title>
+    <meta name="description" content="A standalone Arch-based Linux distribution with 5 editions, each bundling a local AI model.">
+    <meta property="og:title" content="ZephyrOS — AI-Powered Linux Distribution">
+    <meta property="og:description" content="A standalone Arch-based Linux distro with 5 editions bundling local AI models, Wayfire desktop, and UEFI boot support.">
+    <meta property="og:image" content="https://labjankiness.github.io/Personal-Portfolio-WIP/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">ZephyrOS — AI-Powered Linux Distribution</h2>
+        <p class="blog-date">Shell &bull; Linux &bull; archiso &bull; Wayfire &bull; Ollama</p>
+
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>ZephyrOS is a standalone Linux distribution built on Arch Linux. Unlike most distros that require post-install setup, ZephyrOS ships with a locally-running AI model pre-configured out of the box — no internet required for AI features after install.</p>
+
+            <h3>5 Editions</h3>
+            <ul>
+                <li><strong>Scholar</strong> — educational focus, general-purpose AI assistant</li>
+                <li><strong>Dev</strong> — development tools, code generation model</li>
+                <li><strong>SOC</strong> — security operations, threat analysis tools pre-installed</li>
+                <li><strong>Lite</strong> — minimal footprint, lightweight AI model</li>
+                <li><strong>Core</strong> — base system, no AI bundle</li>
+            </ul>
+
+            <h3>Technical details</h3>
+            <p>Built using archiso, Arch's official live media creation tool. Each edition is configured via a profile directory specifying packages, services, and custom scripts. The Wayfire Wayland compositor provides the desktop environment. A guided TUI installer (based on archinstall) handles partitioning, user creation, and bootloader setup with full UEFI support.</p>
+            <p>AI models are bundled via Ollama and auto-start on boot as a systemd service, making them available immediately after login.</p>
+
+            <div style="margin-top: 2rem; display: flex; gap: 12px; flex-wrap: wrap;">
+                <a href="https://labjankiness.github.io/ZephyrOS-WIP/" target="_blank" class="btn primary">Visit Website</a>
+                <a href="https://github.com/labjankiness/ZephyrOS" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p>
+    </footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyOS | Ryan Benedict Quek</title>
+    <meta name="description" content="A bare-metal x86 operating system with GUI desktop, 14 apps, networking, and AI integration.">
+    <meta property="og:title" content="MyOS — Bare-Metal x86 Operating System">
+    <meta property="og:description" content="A bare-metal x86 OS built from scratch in C and Assembly with a Windows 7-style GUI, 14 apps, networking, and AI integration.">
+    <meta property="og:image" content="https://labjankiness.github.io/Personal-Portfolio-WIP/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">MyOS — Bare-Metal x86 Operating System</h2>
+        <p class="blog-date">C &bull; x86 Assembly &bull; GRUB &bull; Systems Programming</p>
+
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>MyOS is a fully bootable x86 operating system built from scratch — no Linux, no POSIX, no standard library. It boots via GRUB into an 800x600 graphical desktop and runs entirely on bare hardware (or QEMU). Everything from the memory allocator to the window manager to the TCP/IP stack is hand-written in C and x86 Assembly.</p>
+
+            <h3>Features</h3>
+            <ul>
+                <li>Windows 7-style GUI with draggable windows, taskbar, start menu, and system clock</li>
+                <li>14 built-in applications: Notepad, Calculator, System Info, Terminal, File Manager, Breeze Browser, Paint, Snake, Minesweeper, Tetris, 2048, Flappy Bird, Solitaire, Checkers</li>
+                <li>50+ terminal commands (ls, cat, mkdir, ping, ifconfig, etc.)</li>
+                <li>Persistent filesystem with file manager and app launching</li>
+                <li>Networking stack (IPv4, TCP, UDP, ICMP, ARP, DHCP)</li>
+                <li>Preemptive multitasking via PIT timer interrupts</li>
+                <li>PC speaker sound system</li>
+                <li>AI assistant integration via local LLM</li>
+            </ul>
+
+            <h3>How it boots</h3>
+            <p><code>boot.asm</code> sets up the GDT, loads the IDT, installs ISR/IRQ stubs, and jumps to <code>kernel_main</code> in C. The kernel then initializes the PIT timer at 100Hz, sets up PS/2 keyboard and mouse drivers via interrupt handlers, allocates heap memory with a simple free-list allocator, and enters the desktop event loop.</p>
+            <p>The framebuffer is set up by GRUB using VESA mode 0x118 (800x600x32). All rendering goes directly to video memory — there's no GPU driver, just pixel writes.</p>
+
+            <h3>The window manager</h3>
+            <p>The WM uses a simple back-to-front painter's algorithm: draw the desktop background, then each window in z-order, with the active window on top. Dragging is handled by tracking mouse delta between frames and updating the window's position. Each app receives keyboard and mouse events via a per-window message queue.</p>
+
+            <h3>What I learned</h3>
+            <p>Building MyOS forced a deep understanding of things that are normally invisible — how interrupts actually work, what the CPU does on a context switch, why virtual memory exists, how TCP segments are assembled from raw Ethernet frames. There's no abstraction to hide behind when you wrote everything yourself.</p>
+
+            <div style="margin-top: 2rem; display: flex; gap: 12px; flex-wrap: wrap;">
+                <a href="https://github.com/labjankiness/Personal-OS-WIP/releases/download/v1.0/my-os.iso" class="btn primary">Download ISO</a>
+                <a href="https://github.com/labjankiness/Personal-OS-WIP" target="_blank" class="btn secondary">View on GitHub</a>
+                <a href="../blog/building-myos.html" class="btn secondary">Read Full Writeup</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p>
+    </footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

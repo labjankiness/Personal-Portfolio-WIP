@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fracture | Ryan Benedict Quek</title>
+    <meta name="description" content="3-phase ML research project: LLM fine-tuning, transformer from scratch, cybersecurity ML tools.">
+    <meta property="og:title" content="Fracture — Security LLM Research">
+    <meta property="og:description" content="Fine-tuning TinyLlama on cybersecurity data using LoRA, building a transformer from scratch, and developing real-world cyber ML tools.">
+    <meta property="og:image" content="https://labjankiness.github.io/Personal-Portfolio-WIP/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">Fracture — Security LLM Research</h2>
+        <p class="blog-date">Python &bull; PyTorch &bull; LoRA &bull; TinyLlama &bull; scikit-learn</p>
+
+        <div class="blog-body">
+            <h3>Overview</h3>
+            <p>Fracture is a 3-phase self-directed ML research project exploring how machine learning can be applied to cybersecurity — from fine-tuning language models on security data, to building a transformer from scratch, to developing real-world threat detection tools.</p>
+
+            <h3>Phase 1 — Fine-tuning TinyLlama on Security Data</h3>
+            <p>Base model: TinyLlama-1.1B-Chat-v1.0. Method: LoRA (Low-Rank Adaptation) with r=16 across 6 attention/MLP modules — only 9.9M of 1.1B parameters are trainable. Trained on 634 examples spanning MMLU security questions, CTF writeups, CVE descriptions, and synthetic QA pairs.</p>
+            <p>The key challenge was dataset quality. Three iterations failed because the MMLU answer texts were 3–10 words long, training the model toward brevity. The fix was replacing all MMLU answers with 100–200 word technical explanations. After that, v4 achieved +5.2 average improvement over baseline across 15 cybersecurity topics, with 10/15 questions improved.</p>
+
+            <h3>Phase 2 — Transformer from Scratch</h3>
+            <p>Building a small transformer (~0.5M parameters) in pure PyTorch — no HuggingFace, no abstractions. Character tokenizer, causal language model, manual attention implementation. Trained on the same Phase 1 dataset for direct comparison against the fine-tuned model.</p>
+
+            <h3>Phase 3 — Cybersecurity ML Tools</h3>
+            <ul>
+                <li><strong>Malware classifier</strong> — PE file feature extraction, Random Forest / Gradient Boosting</li>
+                <li><strong>Intrusion detection</strong> — CICIDS-2017 network flow classifier</li>
+                <li><strong>Log anomaly detector</strong> — Isolation Forest + Autoencoder on auth/Apache logs</li>
+                <li><strong>Vulnerability predictor</strong> — C/C++ static analysis with ML</li>
+            </ul>
+
+            <div style="margin-top: 2rem; display: flex; gap: 12px; flex-wrap: wrap;">
+                <a href="../blog/fracture-security-llm.html" class="btn primary">Read Full Research Writeup</a>
+                <a href="https://github.com/labjankiness/Fracture" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p>
+    </footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate CyberSecurity Arsenal | Ryan Benedict Quek</title>
+    <meta name="description" content="A consolidated collection of 18+ cybersecurity tools covering offensive, defensive, and AI-powered security.">
+    <meta property="og:title" content="Ultimate CyberSecurity Arsenal">
+    <meta property="og:description" content="18+ cybersecurity tools: port scanners in 4 languages, AI SOC agent, honeypots, phishing analyzers, OSINT toolkit, and more.">
+    <meta property="og:image" content="https://labjankiness.github.io/Personal-Portfolio-WIP/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">Ultimate CyberSecurity Arsenal</h2>
+        <p class="blog-date">Python &bull; Go &bull; Rust &bull; C &bull; Ollama</p>
+
+        <div class="blog-body">
+            <h3>Overview</h3>
+            <p>A monorepo of 18+ independent cybersecurity tools built as a hands-on learning platform. Each tool is production-quality with its own CLI, dependencies, and documentation. The repo spans offensive security, defensive tooling, AI-powered threat detection, and security research.</p>
+
+            <h3>AI & Threat Intelligence</h3>
+            <ul>
+                <li><strong>Local AI SOC</strong> — Full SIEM pipeline using local LLMs (Ollama). Triages alerts, maps to MITRE ATT&CK, runs correlation rules, and serves a Streamlit analytics dashboard. Includes a 27-type attack simulator for testing.</li>
+                <li><strong>Phishing Email Analyzer</strong> — Validates SPF/DKIM/DMARC headers, scans URLs for homograph attacks, and uses LLM-based content analysis to flag phishing attempts.</li>
+                <li><strong>AI Phishing Sentinel</strong> — Batch CSV phishing detection with structured JSON reports and risk scoring.</li>
+            </ul>
+
+            <h3>Network Security</h3>
+            <ul>
+                <li><strong>SSH Honeypot</strong> — Fake SSH server that captures credentials, attacker commands, and IP geolocation data with real-time Streamlit dashboard.</li>
+                <li><strong>Network Anomaly Detector</strong> — Statistical baseline profiling with z-score anomaly detection. Identifies port scans, C2 beaconing, DNS tunneling, and lateral movement.</li>
+                <li><strong>Packet Sniffer</strong> — Rust CLI parsing TCP/UDP/ICMP/ARP/IPv4/IPv6 with protocol filtering and hex dump mode.</li>
+                <li><strong>IoT Honeypot</strong> — Multi-port monitoring (80, 8080, 554, 23) simulating common IoT services.</li>
+            </ul>
+
+            <h3>Offensive Tools</h3>
+            <ul>
+                <li><strong>Port Scanner Suite</strong> — Same concurrent TCP scanner implemented in Python, C, Go, and Rust. Versions progress from basic → concurrent → CLI → banner grabbing.</li>
+                <li><strong>Web Vulnerability Scanner</strong> — Tests for SQL injection (error-based + time-based), reflected XSS, LFI, open redirect, and missing security headers.</li>
+                <li><strong>OSINT Toolkit</strong> — Subdomain enumeration (wordlist + crt.sh cert transparency), WHOIS, DNS recon, Google dork generation, email harvesting.</li>
+                <li><strong>Password Cracker</strong> — Dictionary + brute-force with leet speak and capitalization mutations across MD5/SHA1/SHA256/SHA512.</li>
+            </ul>
+
+            <h3>Defensive Tools</h3>
+            <ul>
+                <li><strong>Linux Hardening</strong> — UFW, Fail2Ban, SSH hardening, service debloating, with audit mode.</li>
+                <li><strong>Keylogger Detector</strong> — 8 detection checks: process signatures, LD_PRELOAD hijacking, kernel modules, persistence mechanisms.</li>
+                <li><strong>Guardian Log Analyzer</strong> — SSH auth log parsing with SQLite persistence and IP grouping.</li>
+            </ul>
+
+            <div style="margin-top: 2rem; display: flex; gap: 12px; flex-wrap: wrap;">
+                <a href="https://github.com/labjankiness/Ultimate-CyberSecurity-Arsenal" target="_blank" class="btn primary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p>
+    </footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

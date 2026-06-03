@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Site Generator | Ryan Benedict Quek</title>
+    <meta property="og:title" content="Static Site Generator — Go">
+    <meta property="og:description" content="A markdown-to-HTML static site generator in Go with themes, RSS feed, tag pages, and live reload.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">Static Site Generator</h2>
+        <p class="blog-date">Go &bull; No external dependencies</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>A minimal static site generator written in Go. Reads Markdown files from <code>content/</code>, applies HTML templates, and outputs a complete static site to <code>public/</code>. Zero external dependencies beyond the standard library (plus one YAML parser for config).</p>
+            <h3>Features</h3>
+            <ul>
+                <li>YAML frontmatter parsing (title, date, tags)</li>
+                <li>3 built-in themes: dark, light, minimal — selectable via <code>--theme</code> flag or <code>ssg.yaml</code></li>
+                <li>Auto-generated RSS feed (<code>feed.xml</code>)</li>
+                <li>Tag index pages — one page per tag listing all posts</li>
+                <li>Live rebuild via <code>--watch</code> flag</li>
+                <li>Built-in dev server via <code>--serve</code> flag</li>
+            </ul>
+            <h3>How it works</h3>
+            <p>The Markdown parser is hand-written using only the standard library — no external Markdown library. It handles headings, code blocks with language tags, blockquotes, ordered/unordered lists, inline code, bold, italic, images, and links.</p>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness/Static-Site-Generator" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>

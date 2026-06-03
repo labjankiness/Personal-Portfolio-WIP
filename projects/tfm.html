@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal File Manager | Ryan Benedict Quek</title>
+    <meta property="og:title" content="Terminal File Manager — Rust TUI">
+    <meta property="og:description" content="A dual-panel TUI file manager for Linux built in Rust using ratatui with vim-style navigation.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">RB</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../projects.html" class="active">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="https://github.com/labjankiness" target="_blank">GitHub</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">&#9790;</button></li>
+        </ul>
+    </nav>
+    <section class="container blog-post">
+        <a href="../projects.html" class="link">&larr; Back to Projects</a>
+        <h2 class="section-title" style="margin-top: 20px;">Terminal File Manager</h2>
+        <p class="blog-date">Rust &bull; ratatui &bull; crossterm</p>
+        <div class="blog-body">
+            <h3>What it is</h3>
+            <p>A dual-panel TUI file manager for Linux inspired by Midnight Commander and ranger, built in Rust using the ratatui terminal UI library. Designed for keyboard-driven navigation with a preview pane showing file metadata and text content.</p>
+            <h3>Features</h3>
+            <ul>
+                <li>Dual-panel layout — navigate two directories simultaneously</li>
+                <li>Vim-style navigation (j/k) plus arrow keys</li>
+                <li>File preview pane — shows metadata, first lines of text files</li>
+                <li>File operations: delete, rename, new directory</li>
+                <li>Executable detection with visual indicator</li>
+                <li>Tab to switch active panel</li>
+            </ul>
+            <h3>Built with</h3>
+            <p><code>ratatui</code> for the terminal UI, <code>crossterm</code> for cross-platform terminal input/output. The entire app state is managed in a single <code>App</code> struct with <code>PanelState</code> for each panel.</p>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/labjankiness/Terminal-File-Manager" target="_blank" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer"><p>&copy; 2026 Ryan Benedict Quek Tze Wei. All Rights Reserved.</p></footer>
+    <script src="../js/script.js"></script>
+</body>
+</html>
